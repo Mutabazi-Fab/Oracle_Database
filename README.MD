@@ -1,28 +1,29 @@
-# ECommerce Database Management System
+
+# E-Commerce Database Management System
 _Problem Statement_
+This project manages an e-commerce system that handles data for customers, orders, products, suppliers, and order details. The system aims to manage customer orders, product inventory, and supplier relationships. The database is designed to track:
 
-This project focuses on managing an e-commerce database that handles key data for customers, orders, products, suppliers, and order details. The primary goal is to efficiently manage customer orders, product inventory, and supplier relationships. The database tracks the following:
+# Customers and their personal details.
+Orders placed by customers, including the order date and total amount.
+Products with details like price, stock quantity, and supplier relationships.
+OrderDetails which specify the products within each order.
+Suppliers providing the products.
+The database enables easy querying for order management, inventory control, and supplier interactions, helping the system provide smooth operations for both administrators and users.
 
-- Customers and their personal information.
-- Orders placed by customers, including order dates and total amounts.
-- Products, with details such as price, stock levels, and supplier information.
-- OrderDetails specifying the products included in each order.
-- Suppliers who provide the products.
-The database facilitates seamless querying for order processing, inventory management, and supplier coordination, ensuring smooth operations for both system administrators and users. 
-
-# SQL Commands Executed
+SQL Commands Executed
 1. Table Creation:
-The following tables were created to store essential data:
 
-- Customers Table: Stores customer details like name, email, and phone number.
-- Orders Table: Contains order details and includes a foreign key referencing the Customers table.
-- Products Table: Holds product details such as name, price, and category.
-- OrderDetails Table: Links orders to the specific products, joining the Orders and Products tables.
-- Suppliers Table: Contains supplier information for the products.
-- ProductSuppliers Table: Manages the many-to-many relationship between products and their suppliers.
+Customers Table: Stores customer details like name, email, and phone number.
+Orders Table: Stores order information with a reference to the Customers table via a foreign key.
+Products Table: Stores product details such as name, price, and category.
+OrderDetails Table: Stores the product details for each order, linking to both Orders and Products tables.
+Suppliers Table: Stores information about suppliers providing products to the system.
+ProductSuppliers Table: Manages the many-to-many relationship between products and suppliers.
 
-SQL Example for Creating the Customers Table:
 
+Example SQL for Creating the Customers Table:
+
+```sql
 CREATE TABLE Customers (
     CustomerID NUMBER PRIMARY KEY,
     FirstName VARCHAR2(50),
@@ -31,41 +32,51 @@ CREATE TABLE Customers (
     Phone VARCHAR2(15)
 );
 
+```
+
 2. Inserting Data:
-Data was added to all tables using the INSERT INTO command. Below is an example of inserting customer data into the Customers table:
+Data was inserted into all the tables using the INSERT INTO command. Below is an example of data insertion into the Customers table:
 
-SQL Example for Inserting Data into Customers Table:
+-- Inserting data into Customers table
+```sql
+INSERT INTO Customers (CustomerID, FirstName, LastName, Email, Phone) VALUES 
+(1, 'kevin', 'nshuti', 'nshutikevin@gmail.com', '0788956407');
 
 INSERT INTO Customers (CustomerID, FirstName, LastName, Email, Phone) VALUES 
-(1, 'Kevin', 'Nshuti', 'nshutikevin@gmail.com', '0788956407');
+(2, 'fabrice', 'mucyo', 'mutabazi@gmail.com', '0783123333');
 
-INSERT INTO Customers (CustomerID, FirstName, LastName, Email, Phone) VALUES 
-(2, 'Fabrice', 'Mucyo', 'mutabazi@gmail.com', '0783123333');
+```
 
 3. Querying the Database:
-SQL queries were used to retrieve various information, such as customer orders and product details. An example of a JOIN query to fetch customer orders is shown below:
+SQL queries were used to retrieve information, such as customer orders and details about products. A basic JOIN query to retrieve customer orders:
 
-SQL Example for Retrieving Customer Orders:
+-- Retrieving customer orders
+
+```sql  
 
 SELECT c.FirstName, c.LastName, o.OrderID, o.OrderDate, o.TotalAmount
 FROM Customers c
 JOIN Orders o ON c.CustomerID = o.CustomerID;
 
+```
+
 4. Updating Data:
-The UPDATE command was used to modify existing data. For instance, updating a customer’s email address:
+Data in the tables was modified using the UPDATE command, such as updating a customer’s email address:
 
-SQL Example for Updating a Customer’s Email:
-
+-- Updating a customer's email
+```sql
 UPDATE Customers
 SET Email = 'nshkev808@gmail.com'
 WHERE CustomerID = 1;
+```
 
 5. Deleting Data:
-The DELETE command was utilized to remove records from tables. An example of deleting an order is provided below:
+Data was deleted using the DELETE command. For example, deleting an order:
 
-SQL Example for Deleting an Order:
+-- Deleting an order
 
+```sql
 DELETE FROM Orders
 WHERE OrderID = 102;
 
-
+```
